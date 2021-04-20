@@ -3,15 +3,12 @@ function initNoteListe() {// fonction appelle a chaque initialisation du project
     if (!(note.length == 0)) {// this will be executed when we will have somthing in the storage object
         note.forEach(element => {
 
-            let aux = localStorage[element] // ici on obtien lelement txt
+            let aux = localStorage.getItem(element); 
             let note = JSON.parse(aux);
             // accer a la note
-            add1(note.notetxt); 
+            add1(note.notetxt, element);
             console.log("date" + note.date.date);
             console.log("note texte " + note.notetxt);
-
-            note.notetxt;
-            note.date;
 
         });
     } else {
@@ -28,54 +25,71 @@ function add() {// THIS FUNCTION WILL be an event hendler for adding elemnt
     let input = document.querySelector("#input");
 
     let noteliste = document.querySelector(".noteliste");
-    let note;
-
-    note = addNote(input.value);
-
+    let note = addNote(input.value);
     noteliste.prepend(note);
 }
 
-function add1(txt) {
+function add1(txt, id) {
     let input = document.querySelector("#input");
 
     let noteliste = document.querySelector(".noteliste");
-    let note = notecrafting(txt);
-    
+    let note = notecrafting(txt, id);
+
     noteliste.prepend(note);
 }
 
 function addNote(txtnote) {
-    // get the data ;
     let date = new Date();
-    let auxdate = date.toLocaleDateString(); // la date
-    let auxtime = date.toLocaleTimeString(); // le temp
-    ////////////////////////// ajout de la note a la base de donner ///////////////////////////////////////////////////
-    let note = {// creation de lobject qui sera stocker
+    let auxdate = date.toLocaleDateString(); 
+    let auxtime = date.toLocaleTimeString(); 
+    let note = {
         "notetxt": txtnote,
         "date": {
             "date": auxdate,
             "time": auxtime
         }
     }
-    let noteName = "note" + localStorage.length;
+    let noteName =namegenerator();
     localStorage[noteName] = JSON.stringify(note); // enregistement de la note sous forma de texte 
-    return (notecrafting(txtnote)); // cration dune elemnt note et renvoie 
+    return (notecrafting(txtnote, noteName)); // cration dune elemnt note et renvoie 
 
 }
 
 
 
 
+function namegenerator() {
+    localStorage.hasOwnProperty("note" + localStorage.length)
+    let nom ; 
+    let i; 
+    i = localStorage.length; 
+    do {
+    nom = ("note"+i) ; 
+    i++;
+    } while (localStorage.hasOwnProperty(nom));
+    return nom; 
+}
 
-function notecrafting(noteTxt) {
+
+
+
+
+function notecrafting(txt, noteid) {
     let note = document.createElement("div");
-    //     note.className = "note";
-    //     note.innerHTML = ` <p>${noteTxt} </p>
-    // <button class="btnfait" type="button">fait</button>
-    // <button class="" type="button">suprimer </button>`;
-    note.innerHTML = `<p>${noteTxt} </p>`;
+    note.id = noteid;
+    let notetxt = document.createElement("p");
+    notetxt.innerText = txt;
+    let button = document.createElement("button");
+    button.innerText = "delete";
+    button.addEventListener("click", deleteNote);
+    note.appendChild(notetxt);
+    note.appendChild(button);
     return note;
 }
 
 
-
+function deleteNote() {
+    // removing the elemnt from the database 
+    localStorage.removeItem(this.parentElement.id);// removing the data from the localstorage 
+    this.parentElement.remove();// removing the documùent from document 
+}
