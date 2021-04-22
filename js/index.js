@@ -1,90 +1,95 @@
 function initNoteListe() {// fonction appelle a chaque initialisation du project
-    let note = Object.keys(localStorage);
-    if (!(note.length == 0)) {// this will be executed when we will have somthing in the storage object
-        note.forEach(element => {
-
-            let aux = localStorage.getItem(element); 
-            let note = JSON.parse(aux);
-            // accer a la note
-            add1(note.notetxt, element);
-            console.log("date" + note.date.date);
-            console.log("note texte " + note.notetxt);
-
+    let noteList = Object.keys(localStorage);
+    if (!(noteList.length == 0)) {// this will be executed when we will have somthing in the storage object
+        noteList.forEach(element => {
+            let noteliste = document.querySelector(".noteliste");
+            let note = auxNotecrafting(element);
+            noteliste.prepend(note);
         });
     } else {
         console.log("aucune donner n'ai stocker");
     }
 }
 
+window.addEventListener("load", initNoteListe); 
+document.querySelector(".addbutton").addEventListener('click', addNote);
 
-window.addEventListener("load", initNoteListe); // initialisation de liste pour etre vu .
-document.querySelector(".addbutton").addEventListener('click', add);
-
-
-function add() {// THIS FUNCTION WILL be an event hendler for adding elemnt
+function addNote() {
     let input = document.querySelector("#input");
-
     let noteliste = document.querySelector(".noteliste");
-    let note = addNote(input.value);
-    noteliste.prepend(note);
-}
-
-function add1(txt, id) {
-    let input = document.querySelector("#input");
-
-    let noteliste = document.querySelector(".noteliste");
-    let note = notecrafting(txt, id);
-
-    noteliste.prepend(note);
-}
-
-function addNote(txtnote) {
+    txtnote = input.value;
     let date = new Date();
-    let auxdate = date.toLocaleDateString(); 
-    let auxtime = date.toLocaleTimeString(); 
+    let auxdate = date.toLocaleDateString();
     let note = {
         "notetxt": txtnote,
-        "date": {
-            "date": auxdate,
-            "time": auxtime
-        }
+        "date": auxdate,
+        "done": false,
+        "coolor": "none"
     }
-    let noteName =namegenerator();
+    let noteName = idGenerator();
     localStorage[noteName] = JSON.stringify(note); // enregistement de la note sous forma de texte 
-    return (notecrafting(txtnote, noteName)); // cration dune elemnt note et renvoie 
+    noteliste.prepend(auxNotecrafting(noteName));
 
 }
 
-
-
-
-function namegenerator() {
+function idGenerator() {
     localStorage.hasOwnProperty("note" + localStorage.length)
-    let nom ; 
-    let i; 
-    i = localStorage.length; 
+    let nom;
+    let i;
+    i = localStorage.length;
     do {
-    nom = ("note"+i) ; 
-    i++;
+        nom = ("note" + i);
+        i++;
     } while (localStorage.hasOwnProperty(nom));
-    return nom; 
+    return nom;
 }
 
-
-
-
-
-function notecrafting(txt, noteid) {
+function auxNotecrafting(noteId) {
     let note = document.createElement("div");
-    note.id = noteid;
+    note.id = noteId;// ajout dun id specifique a un elemnt specifique 
+    note.style.backgroundColor = JSON.parse(localStorage[noteId]).coolor;
+
     let notetxt = document.createElement("p");
-    notetxt.innerText = txt;
-    let button = document.createElement("button");
-    button.innerText = "delete";
-    button.addEventListener("click", deleteNote);
+    notetxt.className = "noteTxt";
+    notetxt.innerText = JSON.parse(localStorage[noteId]).notetxt;
+    if (JSON.parse(localStorage[noteId]).done) {
+        notetxt.className += " Strikethrough";
+    }
+
+    let notedate = document.createElement("p");
+    notedate.innerText = JSON.parse(localStorage[noteId]).date;
+
+
+    let deletebnt = document.createElement("button");
+    deletebnt.innerText = "delete";
+    deletebnt.addEventListener("click", deleteNote);
+
+    let doneBtn = document.createElement("button");
+    doneBtn.innerText = "donne";
+    doneBtn.addEventListener("click", doneNote);
+
     note.appendChild(notetxt);
-    note.appendChild(button);
+    note.appendChild(notedate);
+    note.appendChild(deletebnt);
+    note.appendChild(doneBtn);
     return note;
+}
+
+function doneNote() {// lecriture ici peut etre optimiser en remplassan les chanmp redondnat par 
+    let notetxt = this.parentElement.getElementsByClassName("noteTxt")[0];
+    if (JSON.parse(localStorage[this.parentElement.id]).done) {
+        let note = JSON.parse(localStorage[this.parentElement.id]);
+        note.done = false;
+        localStorage[this.parentElement.id] = JSON.stringify(note);
+        notetxt.className = notetxt.className.replace(" Strikethrough", "");
+    } else {
+        let note = JSON.parse(localStorage[this.parentElement.id]);
+        note.done = true;
+        localStorage[this.parentElement.id] = JSON.stringify(note);
+        notetxt.className += " Strikethrough";
+    }
+
+
 }
 
 
