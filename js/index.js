@@ -11,10 +11,12 @@ function initNoteListe() {// fonction appelle a chaque initialisation du project
     }
 }
 
-window.addEventListener("load", initNoteListe); 
-document.querySelector(".addbutton").addEventListener('click', addNote);
-
 function addNote() {
+    ///////////////////////////////// POUR enelever un beug 
+    let btn = this.parentElement.querySelector("button"); 
+    btn.className = btn.className.replace(" showbtn", ""); 
+    ////////////////////////////////
+    console.log('ok'); 
     let input = document.querySelector("#input");
     let noteliste = document.querySelector(".noteliste");
     txtnote = input.value;
@@ -48,6 +50,7 @@ function auxNotecrafting(noteId) {
     let note = document.createElement("div");
     note.id = noteId;// ajout dun id specifique a un elemnt specifique 
     note.style.backgroundColor = JSON.parse(localStorage[noteId]).coolor;
+    note.className = "noteSytle"; 
 
     let notetxt = document.createElement("p");
     notetxt.className = "noteTxt";
@@ -76,6 +79,7 @@ function auxNotecrafting(noteId) {
 }
 
 function doneNote() {// lecriture ici peut etre optimiser en remplassan les chanmp redondnat par 
+    
     let notetxt = this.parentElement.getElementsByClassName("noteTxt")[0];
     if (JSON.parse(localStorage[this.parentElement.id]).done) {
         let note = JSON.parse(localStorage[this.parentElement.id]);
@@ -88,13 +92,22 @@ function doneNote() {// lecriture ici peut etre optimiser en remplassan les chan
         localStorage[this.parentElement.id] = JSON.stringify(note);
         notetxt.className += " Strikethrough";
     }
-
-
 }
-
 
 function deleteNote() {
     // removing the elemnt from the database 
     localStorage.removeItem(this.parentElement.id);// removing the data from the localstorage 
     this.parentElement.remove();// removing the documùent from document 
 }
+
+function showAddBtn(){
+    let btn = this.parentElement.querySelector("button"); 
+    btn.className += " showbtn"; 
+    
+}
+
+let input = document.querySelector("#input"); 
+input.addEventListener("focus",showAddBtn); 
+
+window.addEventListener("load", initNoteListe);
+document.querySelector(".addbutton").addEventListener('click', addNote);

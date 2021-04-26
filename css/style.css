@@ -1,3 +1,87 @@
-.Strikethrough{
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+}
+
+.inputbox {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+    border-radius: 0 0 8px 8px;
+}
+
+#input {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 80%;
+    height: 30px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #126e82;
+    font-size: 20px;
+    font-family: 'Cairo', sans-serif;
+    padding: 20px;
+}
+
+button{
+    margin: 10px;
+    width: 20%;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+    text-align: center;
+    background-color: #132c33;
+    color: white;
+    
+}
+
+.addbutton {
+    margin: 10px;
+    width: 15%;
+    height: 46px;
+    border-radius: 5px;
+    border-style: none;
+    text-align: center;
+    background-color: #132c33;
+    color: white;
+    display: none;
+}
+
+.addbutton:hover {
+    background-color: #397788;
+    transition-property: background-color;
+    transition-duration: 0.3s;
+}
+
+.Strikethrough {
     text-decoration: line-through;
+}
+
+.showbtn {
+    display: inline-block;
+}
+
+.noteliste {
+    width: 50%;
+    margin: auto;
+    background-color: #EEE;
+  
+
+}
+
+.noteSytle {
+    margin: 20px;
+    background-color: #d8e3e7;
+    padding: 4px;
+    text-align: right;
+}
+
+.noteliste .noteTxt{
+    width: 100%;
+    text-align: left;
+    
 }
