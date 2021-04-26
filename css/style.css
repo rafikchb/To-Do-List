@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+
 }
 
 body {
@@ -8,27 +9,67 @@ body {
 }
 
 .inputbox {
+    
+    padding-top: 50px;
+    display: flex;
+    justify-content : space-between;
     width: 50%;
+    height: 40px;
     margin: auto;
-    text-align: left;
-    border-radius: 0 0 8px 8px;
 }
 
 #input {
-    box-sizing: border-box;
-    display: inline-block;
+    
     width: 80%;
-    height: 30px;
-    border-width: 2px;
+    height: 100%;
+    box-sizing: border-box;
+    padding:10px 5px 0 0px ;
+    border-style: none none solid none;
+    border-color: #d8e3e7;
+    color: rgb(18, 18, 19);
+    transition-property:  padding ;
+    transition-duration: 0.25s;
+}
+#input:focus{
+outline: none;
+border-style: none none solid none;
+border-color: #51c4d3;
+caret-color: #51c4d3;
+padding-left: 5px ;
+
+
+}
+#input::placeholder{
+    opacity: 0.8;
+    color: #1f264d;
+} 
+.addbutton{
+    height: 100%;
+    width: 19%;
+    box-sizing: border-box; 
     border-style: solid;
-    border-color: #126e82;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #d8e3e7;
+    transition-property: border-color,color;
+    transition-duration: 0.3s;
+    background-color: inherit;
     font-size: 20px;
-    font-family: 'Cairo', sans-serif;
-    padding: 20px;
+    color: #d8e3e7;
 }
 
-button{
-    margin: 10px;
+.addbutton:hover{
+    border-color: #51c4d3;
+    color: #51c4d3;
+   
+}
+.addbutton:disabled{
+    
+    color: #d8e3e7;
+    border-color: #d8e3e7;
+}
+
+/* button{
     width: 20%;
     height: 30px;
     border-radius: 5px;
@@ -37,39 +78,23 @@ button{
     background-color: #132c33;
     color: white;
     
-}
+} */
 
-.addbutton {
-    margin: 10px;
-    width: 15%;
-    height: 46px;
-    border-radius: 5px;
-    border-style: none;
-    text-align: center;
-    background-color: #132c33;
-    color: white;
-    display: none;
-}
 
-.addbutton:hover {
-    background-color: #397788;
-    transition-property: background-color;
-    transition-duration: 0.3s;
-}
+
 
 .Strikethrough {
     text-decoration: line-through;
 }
 
 .showbtn {
-    display: inline-block;
+   visibility: visible;
 }
 
 .noteliste {
     width: 50%;
     margin: auto;
     background-color: #EEE;
-  
 
 }
 

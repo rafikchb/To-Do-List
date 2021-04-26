@@ -103,11 +103,20 @@ function deleteNote() {
 function showAddBtn(){
     let btn = this.parentElement.querySelector("button"); 
     btn.className += " showbtn"; 
-    
 }
+function desactivatBtn(){
+    if(this.value == ""){
+        addBtn.disabled = true; 
+    }else{
+        addBtn.disabled = false; 
+    }
+}
+
 
 let input = document.querySelector("#input"); 
 input.addEventListener("focus",showAddBtn); 
+input.addEventListener("input", desactivatBtn);
 
 window.addEventListener("load", initNoteListe);
-document.querySelector(".addbutton").addEventListener('click', addNote);
+let addBtn = document.querySelector(".addbutton"); 
+addBtn.addEventListener('click', addNote);
