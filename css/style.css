@@ -1,112 +1,184 @@
+
 * {
     padding: 0;
     margin: 0;
-
 }
 
 body {
+    font-family: 'Dancing Script','Orelega One', cursive;
     width: 100%;
+    color: #132c33;
+}
+h1{
+    width: max-content;
+    margin: 30px auto;
 }
 
 .inputbox {
-    
-    padding-top: 50px;
     display: flex;
-    justify-content : space-between;
+    justify-content: space-between;
     width: 50%;
     height: 40px;
     margin: auto;
 }
 
 #input {
-    
     width: 80%;
     height: 100%;
     box-sizing: border-box;
-    padding:10px 5px 0 0px ;
+    padding: 10px 5px 0 0px;
     border-style: none none solid none;
     border-color: #d8e3e7;
-    color: rgb(18, 18, 19);
-    transition-property:  padding ;
+    color: inherit;
+    font-weight: 400;
+    transition-property: padding;
     transition-duration: 0.25s;
+    
+    font-family: 'Dancing Script','Orelega One', cursive;
+    font-size: large;
 }
-#input:focus{
-outline: none;
-border-style: none none solid none;
-border-color: #51c4d3;
-caret-color: #51c4d3;
-padding-left: 5px ;
 
-
+#input:focus {
+    outline: none;
+    border-style: none none solid none;
+    border-color: #51c4d3;
+    caret-color: #51c4d3;
+    padding-left: 5px;
 }
-#input::placeholder{
+
+#input::placeholder {
     opacity: 0.8;
     color: #1f264d;
+}
+button{
+    width: 20%;
+    max-width: 60px;
+    margin: 0 8px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: none;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: inherit;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+    
 } 
-.addbutton{
+.addbutton {
+    max-width: none;
     height: 100%;
     width: 19%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
     border-color: #d8e3e7;
-    transition-property: border-color,color;
+    transition-property: border-color, color;
     transition-duration: 0.3s;
     background-color: inherit;
     font-size: 20px;
     color: #d8e3e7;
 }
 
-.addbutton:hover{
+.addbutton:hover {
     border-color: #51c4d3;
     color: #51c4d3;
-   
 }
-.addbutton:disabled{
-    
+
+.addbutton:disabled {
     color: #d8e3e7;
     border-color: #d8e3e7;
 }
 
-/* button{
-    width: 20%;
-    height: 30px;
+
+
+button:hover{
+  
+    background-color: inherit;
+    border-style: solid;
     border-radius: 5px;
-    border-style: none;
-    text-align: center;
-    background-color: #132c33;
-    color: white;
+    border-width: 2px;
+    border-color: #30727a;;
     
-} */
-
-
-
+} 
 
 .Strikethrough {
     text-decoration: line-through;
 }
 
 .showbtn {
-   visibility: visible;
+    visibility: visible;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 20px;
+    text-decoration:underline;
+    text-underline-offset: 5px;
+}
+
+.listContainer {
+    width: 50%;
+    margin: 0 auto;
+    
+    
 }
 
 .noteliste {
-    width: 50%;
+    width: 100%;
     margin: auto;
-    background-color: #EEE;
-
+    overflow: auto
 }
 
 .noteSytle {
-    margin: 20px;
-    background-color: #d8e3e7;
-    padding: 4px;
+    margin: 20px 0 20px 0;
+    padding: 5px;
     text-align: right;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #d8e3e7;
+    border-radius: 5px;
+    transition-property: border-color;
+    transition-duration: 0.15s;
+    position: relative;
+    font-size: larger;
+}
+.noteSytle .noteTxt{
+    padding-left: 3px;
 }
 
-.noteliste .noteTxt{
+.noteDate {
+    visibility: hidden;
+    display: block;
+    width:max-content;
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    position:absolute; 
+    left: 3px;
+    bottom: 3px;
+    font-size: small;
+}
+
+.noteSytle:hover .noteDate {
+    visibility: visible;
+    opacity : 1;
+}
+
+.noteSytle:hover {
+    border-color: #51c4d3;
+}
+
+p {
+    width: 100%;
+    text-align: left;
+}
+
+
+/* .noteliste .noteTxt{
     width: 100%;
     text-align: left;
     
-}
+} */

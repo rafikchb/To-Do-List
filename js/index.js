@@ -15,11 +15,14 @@ function addNote() {
     ///////////////////////////////// POUR enelever un beug 
     let btn = this.parentElement.querySelector("button"); 
     btn.className = btn.className.replace(" showbtn", ""); 
+
     ////////////////////////////////
-    console.log('ok'); 
+
+    
     let input = document.querySelector("#input");
     let noteliste = document.querySelector(".noteliste");
     txtnote = input.value;
+    input.value = ""; 
     let date = new Date();
     let auxdate = date.toLocaleDateString();
     let note = {
@@ -60,6 +63,7 @@ function auxNotecrafting(noteId) {
     }
 
     let notedate = document.createElement("p");
+    notedate.className = "noteDate"; 
     notedate.innerText = JSON.parse(localStorage[noteId]).date;
 
 
